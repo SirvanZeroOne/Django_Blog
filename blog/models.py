@@ -12,3 +12,8 @@ class Post(models.Model):
     body = models.TextField()
     created_date = models.DateTimeField(auto_now_add=True)
     status = models.CharField(max_length=10, choices=STATUS_CHOICES , default='draft')
+
+    def __str__(self):
+        return self.title
+
+
