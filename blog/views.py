@@ -8,9 +8,8 @@ from blog.models import Post
 def post_list(request):
     posts = Post.objects.filter(status='published')
     context = {
-        'posts': posts,
-    }
-    return HttpResponse("HElloooo")
+        'posts': posts,}
+    return render(request, 'post_list.html', context)
 
 def post_detail(request, year, month, day , slug):
     try:
