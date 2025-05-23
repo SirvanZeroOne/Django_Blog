@@ -11,6 +11,7 @@ def post_list(request):
         'posts': posts,}
     return render(request, 'post_list.html', context)
 
+
 def post_detail(request, year, month, day , slug):
     try:
         post = Post.objects.get(created_date__year=year, created_date__month=month, created_date__day=day,slug=slug,status='published')
@@ -21,3 +22,5 @@ def post_detail(request, year, month, day , slug):
              'post': post,
     }
     return HttpResponse('<h1> {} </h1>'.format(post.title))
+def post_contact(request):
+    return HttpResponse('<h1> CONTACT US </h1>')

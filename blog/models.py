@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
+from  django.shortcuts import reverse
 
 # Create your models here.
 class Post(models.Model):
@@ -15,6 +16,9 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
+
+    def get_absolute_url(self):
+        return reverse('post_detail', args=[self.created_date.year, self.created_date.strftime('%m'), self.created_date.strftime('%d'), self.slug])
 
 
 

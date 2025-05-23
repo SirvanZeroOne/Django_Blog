@@ -1,14 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Post list </title>
-</head>
-<body>
-<h1> SAlam salam</h1>
-{%for post in posts%}
-<a href="/">{{post.title}} </a>
-{{year}}
+{% extends 'Home.html' %}
+
+{% block body %}
+{% for post in posts %}
+<h1><a href=" {{ post.get_absolute_url }}">{{post.title}}</a></h1>
 {% endfor %}
-</body>
-</html>
+{% endblock %}

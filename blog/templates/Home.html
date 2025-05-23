@@ -2,9 +2,17 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Home</title>
+    <title>
+        {% block title %}
+        titleee
+        {% endblock %}
+    </title>
 </head>
 <body>
-go to
+{% block body %}
+<h1>THis is home body </h1>
+{% endblock %}
+
+<a href=" {% url 'contact_us' %}" > CONTACT US</a>
 </body>
 </html>
