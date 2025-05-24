@@ -17,6 +17,9 @@ class Post(models.Model):
     def __str__(self):
         return self.title
 
+    def active_comments(self):
+        return  self.comment_set.filter(active=True)
+
     def get_absolute_url(self):
         return reverse('post_detail', args=[self.created_date.year, self.created_date.strftime('%m'), self.created_date.strftime('%d'), self.slug])
 
