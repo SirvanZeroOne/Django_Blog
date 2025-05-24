@@ -20,5 +20,16 @@ class Post(models.Model):
     def get_absolute_url(self):
         return reverse('post_detail', args=[self.created_date.year, self.created_date.strftime('%m'), self.created_date.strftime('%d'), self.slug])
 
+class Comment(models.Model):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    name = models.CharField(max_length=100)
+    email = models.EmailField()
+    comment = models.CharField(max_length=500)
+    created_date = models.DateTimeField(auto_now_add=True)
+    active = models.BooleanField(default=False)
+
+    def __str__(self):
+        return '{} by {}'.format(self.name, self.name)
+
 
 
