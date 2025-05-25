@@ -1,0 +1,14 @@
+{% extends 'Home.html' %}
+ {% block body %}
+<h1> {{post.title}} </h1>
+<p> {{post.body}}  </p>
+<p>  This post created by : {{post.author }} at: {{ post.created_date }}</p>
+
+This is Comment of this post:
+{% for comment in post.active_comments %}
+<p>{{comment.name}}</p>
+<p>{{comment.comment}}</p>
+
+
+{% endfor %}
+{% endblock %}

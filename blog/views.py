@@ -1,7 +1,7 @@
 from django.http import HttpResponse, Http404
 from django.shortcuts import render
 
-from blog.models import Post
+from blog.models import Post,Comment
 
 
 # Create your views here.
@@ -18,9 +18,11 @@ def post_detail(request, year, month, day , slug):
     except Post.DoesNotExist:
         raise Http404("Post does not exist")
 
+
     context = {
              'post': post,
     }
-    return HttpResponse('<h1> {} </h1>'.format(post.title))
+    return render(request, 'post_detail.html', context)
+
 def post_contact(request):
     return HttpResponse('<h1> CONTACT US </h1>')
