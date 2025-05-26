@@ -1,5 +1,7 @@
 from django.http import HttpResponse, Http404
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from . import forms
+from django.contrib import messages
 
 from blog.models import Post,Comment
 
@@ -17,11 +19,22 @@ def post_detail(request, year, month, day , slug):
         post = Post.objects.get(created_date__year=year, created_date__month=month, created_date__day=day,slug=slug,status='published')
     except Post.DoesNotExist:
         raise Http404("Post does not exist")
+    comment_form = forms.comment_forms()
+    new_comment = None
 
-
+    if request.method == 'POST':
+        comment_form = forms.comment_forms(data=request.POST)
+        if comment_form.is_valid():
+            new_comment = comment_form.save(commit=False)
+            new_comment.post = post
+            new_comment.save()
+            return redirect('post_detail', year, month, day, slug)
     context = {
              'post': post,
+        'comment_form': comment_form,
+        'new_comment': new_comment,
     }
+
     return render(request, 'post_detail.html', context)
 
 def post_contact(request):

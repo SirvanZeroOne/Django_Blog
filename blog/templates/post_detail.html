@@ -1,14 +1,31 @@
 {% extends 'Home.html' %}
- {% block body %}
+
+
+ {% block content %}
 <h1> {{post.title}} </h1>
 <p> {{post.body}}  </p>
 <p>  This post created by : {{post.author }} at: {{ post.created_date }}</p>
+{% endblock %}
+
+
+{% block comment %}
+{% if new_comment %}
+<p>  waiting for approval  </p>
+{% else %}
+<p> Leave a Comment:</p>
+<form method="post">
+ {{ comment_form.as_p }}
+        {% csrf_token %}
+
+
+ <input type="submit" value="Send Comment">
+
+</form>
+{% endif %}
 
 This is Comment of this post:
 {% for comment in post.active_comments %}
 <p>{{comment.name}}</p>
 <p>{{comment.comment}}</p>
-
-
 {% endfor %}
 {% endblock %}
