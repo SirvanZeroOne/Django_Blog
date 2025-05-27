@@ -3,5 +3,6 @@
 {% block content %}
 {% for post in posts %}
 <h1><a href=" {{ post.get_absolute_url }}">{{post.title}}</a></h1>
+tags: {{post.tags.all|join:","}}
 {% endfor %}
 {% endblock %}

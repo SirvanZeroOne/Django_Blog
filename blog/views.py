@@ -1,14 +1,17 @@
 from django.http import HttpResponse, Http404
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from . import forms
-from django.contrib import messages
-
-from blog.models import Post,Comment
+from taggit.models import Tag
+from blog.models import Post
 
 
 # Create your views here.
-def post_list(request):
-    posts = Post.objects.filter(status='published')
+def post_list(request, tag_slug=None):
+    if tag_slug:
+        tag = get_object_or_404(Tag, slug=tag_slug)
+        posts = Post.objects.filter(status='published' , tags__in=[tag])
+    else:
+        posts = Post.objects.filter(status='published')
     context = {
         'posts': posts,}
     return render(request, 'post_list.html', context)

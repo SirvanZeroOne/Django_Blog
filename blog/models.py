@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User
 from django.db import models
 from  django.shortcuts import reverse
+from taggit.managers import TaggableManager
 
 # Create your models here.
 class Post(models.Model):
@@ -13,6 +14,7 @@ class Post(models.Model):
     body = models.TextField()
     created_date = models.DateTimeField(auto_now_add=True)
     status = models.CharField(max_length=10, choices=STATUS_CHOICES , default='draft')
+    tags = TaggableManager()
 
     def __str__(self):
         return self.title
