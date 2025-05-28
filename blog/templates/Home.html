@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+
+{% load my_tags %}
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <title>
@@ -14,6 +16,9 @@
 {% endblock %}
 {% block comment %}
 {% endblock %}
+</br>
+
+total post count : {%total_count%}}
 
 </br>
 <a href=" {% url 'contact_us' %}" > CONTACT US</a>
