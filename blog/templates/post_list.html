@@ -3,6 +3,11 @@
 {% block content %}
 {% for post in posts %}
 <h1><a href=" {{ post.get_absolute_url }}">{{post.title}}</a></h1>
-tags: {{post.tags.all|join:","}}
+tags:
+{% for tag in post.tags.all %}
+<a href="{% url 'index_tag' tag.slug %}">{{ tag.slug }}</a>
+{% if not forloop.last %},{% endif %}
+{% endfor %}
+
 {% endfor %}
 {% endblock %}
