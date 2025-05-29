@@ -14,7 +14,7 @@ def post_list(request, tag_slug=None):
         posts = Post.objects.filter(status='published')
     context = {
         'posts': posts,}
-    return render(request, 'post_list.html', context)
+    return render(request, 'index.html', context)
 
 
 def post_detail(request, year, month, day , slug):
