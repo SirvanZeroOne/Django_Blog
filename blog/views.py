@@ -3,6 +3,8 @@ from django.shortcuts import render, redirect, get_object_or_404
 from . import forms
 from taggit.models import Tag
 from blog.models import Post
+from django.core.paginator import Paginator
+
 
 
 # Create your views here.
@@ -12,8 +14,13 @@ def post_list(request, tag_slug=None):
         posts = Post.objects.filter(status='published' , tags__in=[tag])
     else:
         posts = Post.objects.filter(status='published')
+    paginator = Paginator(posts, 2)  # Show 25 contacts per page.
+
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
     context = {
-        'posts': posts,}
+        'page_obj': page_obj,
+    }
     return render(request, 'index.html', context)
 
 
@@ -42,3 +49,4 @@ def post_detail(request, year, month, day , slug):
 
 def post_contact(request):
     return HttpResponse('<h1> CONTACT US </h1>')
+
